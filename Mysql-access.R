@@ -30,4 +30,27 @@ dbClearResult(dbListResults(ucsvDB)[[1]])
 dbDisconnect(ucsvDB)
 
 #How to access HDF5 
+#Installing the packages 
+source ("http://bioconductor.org/biocLite.R")
+biocLite ("rhdf5")
+library (rhdf5)
+#Creating a HDF5 file.
+create = h5createFile("example.h5")
+#Creating some sub groups.
+create = h5createGroup(file="example.h5", group="foo")
+create = h5createGroup (file="example.h5", group="bar")
+create = h5createGroup(file="example.h5", group ="foo/subgrpfoo")
+h5ls(file="example.h5")
+#Inserting datainto the example.h5 file.
+A = matrix (data=1:10, nrow=5, ncol=2)
+h5write(obj=A, file="example.h5", name="foo/A")
+h5ls("example.h5")
+B = array (data=seq(0.1, 2.0 , by = 0.1), dim =c(5,2,2))
+h5write (obj=B, file ="example.h5", name="foo/B")
+h5ls("example.h5")
 
+#Reading the data from the H5 file
+readA = h5read(file="example.h5", "foo/A")
+readA
+readB = h5read (file="example.h5", "foo/B")
+readB
