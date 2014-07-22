@@ -5,6 +5,8 @@ df = data.frame ( "var1" = sample(1:5), "var2" = sample(6:10), "var3"= sample(11
 df
 df = df[sample(1:5), ];df$var2[c(2,3)] = NA
 df
+df[1:3, 2:3]
+
 #Subsetting 
 #subset the first column in df
 df[,1]
